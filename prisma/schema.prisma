@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ═══════════════════════════════════════════════════
+// FORGE - Database Schema
+// PostgreSQL via Prisma ORM
+// ═══════════════════════════════════════════════════
+
+model User {
+  id            String   @id @default(cuid())
+  email         String?  @unique
+  name          String
+  avatar        String?
+  role          String   @default("builder") // admin, builder, student
+  language      String   @default("en") // en, ro
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  projects      Project[]
+  progress      LessonProgress[]
+  skills        UserSkill[]
+  sessions      Session[]
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  userId        String
+  name          String
+  description   String?
+  idea          String?
+  status        String   @default("planning") // planning, building, testing, deployed
+  template      String?
+  techStack     String[] @default([])
+  files         Json     @default("[]") // FileNode[] stored as JSON
+  roadmap       Json     @default("[]") // RoadmapItem[] stored as JSON
+  assignedAgents String[] @default([])
+  isPublic      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  user          User     @relation(fields: [userId], references: [id])
+}
+
+model Course {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  titleRo       String?
+  description   String?
+  descriptionRo String?
+  icon          String?
+  color         String?
+  level         String   @default("beginner") // beginner, intermediate, advanced
+  tags          String[] @default([])
+  totalLessons  Int      @default(0)
+  estimatedHours Int     @default(0)
+  isPublished   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  modules       CourseModule[]
+}
+
+model CourseModule {
+  id            String   @id @default(cuid())
+  courseId      String
+  title         String
+  titleRo       String?
+  order         Int      @default(0)
+
+  course        Course   @relation(fields: [courseId], references: [id])
+  lessons       Lesson[]
+}
+
+model Lesson {
+  id            String   @id @default(cuid())
+  moduleId      String
+  slug          String
+  title         String
+  titleRo       String?
+  content       String?  @db.Text
+  contentRo     String?  @db.Text
+  type          String   @default("explanation") // explanation, example, exercise, builder, summary
+  estimatedMinutes Int   @default(15)
+  order         Int      @default(0)
+
+  module        CourseModule @relation(fields: [moduleId], references: [id])
+  progress      LessonProgress[]
+}
+
+model LessonProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  lessonId      String
+  completed     Boolean  @default(false)
+  completedAt   DateTime?
+
+  user          User     @relation(fields: [userId], references: [id])
+  lesson        Lesson   @relation(fields: [lessonId], references: [id])
+
+  @@unique([userId, lessonId])
+}
+
+model Skill {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  category      String?
+  description   String?
+
+  userSkills    UserSkill[]
+}
+
+model UserSkill {
+  id            String   @id @default(cuid())
+  userId        String
+  skillId       String
+  level         Int      @default(0) // 0-100
+
+  user          User     @relation(fields: [userId], references: [id])
+  skill         Skill    @relation(fields: [skillId], references: [id])
+
+  @@unique([userId, skillId])
+}
+
+model Book {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  titleRo       String?
+  description   String?
+  descriptionRo String?
+  coverColor    String?
+  totalChapters Int      @default(0)
+  isPublished   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  chapters      BookChapter[]
+}
+
+model BookChapter {
+  id            String   @id @default(cuid())
+  bookId        String
+  title         String
+  titleRo       String?
+  content       String?  @db.Text
+  contentRo     String?  @db.Text
+  order         Int      @default(0)
+
+  book          Book     @relation(fields: [bookId], references: [id])
+}
+
+model Session {
+  id            String   @id @default(cuid())
+  userId        String
+  token         String   @unique
+  ipAddress     String?
+  userAgent     String?
+  expiresAt     DateTime
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id])
+}
+
+model Prompt {
+  id            String   @id @default(cuid())
+  title         String
+  titleRo       String?
+  content       String   @db.Text
+  contentRo     String?  @db.Text
+  category      String
+  tags          String[] @default([])
+  platform      String   @default("openrouter")
+  isPublic      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
+
+model Template {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  nameRo        String?
+  description   String?
+  descriptionRo String?
+  icon          String?
+  color         String?
+  techStack     String[] @default([])
+  category      String   @default("web")
+  files         Json     @default("[]")
+  isPublic      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
