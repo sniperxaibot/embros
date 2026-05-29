@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: dark; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #0a0a0b; color: #e2e2e7;
+    min-height: 100vh; -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #323238; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #45454c; }
+  input, textarea { font-size: 16px; } { /* Prevent iOS zoom */ }
+}
+
+@layer components {
+  .btn-primary {
+    background: #f59e0b; color: #0a0a0b; font-weight: 600;
+    padding: 0.625rem 1.25rem; border-radius: 0.5rem; border: none;
+    cursor: pointer; font-size: 0.875rem; transition: all 0.15s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    white-space: nowrap; min-height: 44px; /* Touch target */
+  }
+  .btn-primary:hover { background: #fbbf24; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: #1a1a1e; color: #e2e2e7; font-weight: 500;
+    padding: 0.625rem 1.25rem; border-radius: 0.5rem;
+    border: 1px solid #252529; cursor: pointer; font-size: 0.875rem;
+    transition: all 0.15s; display: inline-flex; align-items: center; gap: 0.5rem;
+    white-space: nowrap; min-height: 44px;
+  }
+  .btn-secondary:hover { background: #252529; }
+}
