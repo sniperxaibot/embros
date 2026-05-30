@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forge — Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #0a0a0b; --surface: #111113; --border: #252529; --text: #e2e2e7; --muted: #6b6b73; --amber: #f59e0b; --blue: #3b82f6; --green: #10b981; --purple: #a855f7; --red: #ef4444; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+.slide { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; position: relative; border-bottom: 1px solid var(--border); }
+.slide-number { position: absolute; top: 24px; right: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+.nav { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 100; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 6px; }
+.nav button { width: 10px; height: 10px; border-radius: 50%; border: none; background: var(--border); cursor: pointer; transition: all .2s; }
+.nav button.active { background: var(--amber); transform: scale(1.3); }
+.nav button:hover { background: var(--muted); }
+h1 { font-size: clamp(2rem, 6vw, 5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; text-align: center; }
+h2 { font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.02em; text-align: center; margin-bottom: 16px; }
+.subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); text-align: center; max-width: 600px; line-height: 1.6; }
+.tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.tag-amber { background: rgba(245,158,11,.08); border-color: rgba(245,158,11,.2); color: var(--amber); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; max-width: 900px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 900px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; max-width: 900px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.stat { text-align: center; }
+.stat .number { font-size: 48px; font-weight: 900; color: var(--amber); line-height: 1; }
+.stat .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.comparison { display: flex; flex-direction: column; gap: 12px; max-width: 700px; width: 100%; }
+.comparison-row { display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.comparison-row .bad { color: var(--red); text-decoration: line-through; font-size: 14px; min-width: 200px; }
+.comparison-row .arrow { color: var(--border); }
+.comparison-row .good { color: var(--green); font-weight: 600; font-size: 14px; }
+.feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; width: 100%; }
+.feature { display: flex; gap: 16px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
+.feature .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.feature h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.feature p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.timeline { display: flex; flex-direction: column; gap: 16px; max-width: 700px; width: 100%; }
+.timeline-item { display: flex; gap: 20px; }
+.timeline-item .date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--amber); min-width: 80px; padding-top: 2px; }
+.timeline-item .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); flex-shrink: 0; margin-top: 6px; }
+.timeline-item .content h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.timeline-item .content p { font-size: 12px; color: var(--muted); }
+.contact { text-align: center; }
+.contact .email { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--amber); margin-top: 16px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 24px; }
+.logo .flame { width: 36px; height: 36px; background: var(--amber); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 800px; width: 100%; }
+.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; }
+.price-card.featured { border-color: var(--amber); }
+.price-card .tier { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.price-card .price { font-size: 36px; font-weight: 900; color: var(--amber); }
+.price-card .price span { font-size: 14px; font-weight: 400; color: var(--muted); }
+.price-card ul { list-style: none; margin-top: 16px; text-align: left; }
+.price-card ul li { font-size: 12px; color: var(--muted); padding: 4px 0; }
+.cta-final { text-align: center; }
+.cta-final h1 { margin-bottom: 12px; }
+@media print { .nav { display: none; } .slide { page-break-after: always; min-height: auto; padding: 40px 24px; } }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide" id="s1">
+  <span class="slide-number">01 / 10</span>
+  <div style="margin-bottom:24px;width:64px;height:64px;background:var(--amber);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:36px;">🔥</div>
+  <h1>Forge</h1>
+  <p class="tag tag-amber" style="margin-top:16px;">AI Builder Operating System</p>
+  <p class="subtitle">The platform that teaches anyone to build real products with AI agents, adapting automatically to their progress.</p>
+  <p style="margin-top:32px;font-size:13px;color:var(--muted);">kodesweb3 · 2026</p>
+</div>
+
+<!-- SLIDE 2: Problem -->
+<div class="slide" id="s2">
+  <span class="slide-number">02 / 10</span>
+  <p class="tag tag-amber">The Problem</p>
+  <h2 style="margin-bottom:32px;">95% of people with ideas<br>can't build them.</h2>
+  <div class="grid-3">
+    <div class="card stat">
+      <div class="number">68%</div>
+      <div class="label">of learners can't transfer<br>tutorial knowledge to projects</div>
+    </div>
+    <div class="card stat">
+      <div class="number">85%</div>
+      <div class="label">of code is written by AI<br>— but nobody teaches how</div>
+    </div>
+    <div class="card stat">
+      <div class="number">400B€</div>
+      <div class="label">e-learning market growing<br>45% CAGR</div>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:24px;">
+    <div class="card"><h3>💡 The Idea Gap</h3><p>Millions have ideas but don't know where to start. Tutorials teach Todo apps, not what they want to build.</p></div>
+    <div class="card"><h3>🔧 Tool Fragmentation</h3><p>One tool for learning, another for coding, another for deploying. None talk to each other. None adapt.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Solution -->
+<div class="slide" id="s3">
+  <span class="slide-number">03 / 10</span>
+  <p class="tag tag-amber">The Solution</p>
+  <h2 style="margin-bottom:32px;">One operating system.<br>Idea → Shipped product.</h2>
+  <div class="comparison">
+    <div class="comparison-row"><span class="bad">Learn to code first</span><span class="arrow">→</span><span class="good">Build first, learn what you need</span></div>
+    <div class="comparison-row"><span class="bad">Static courses</span><span class="arrow">→</span><span class="good">Adaptive learning that detects gaps</span></div>
+    <div class="comparison-row"><span class="bad">Single AI chat</span><span class="arrow">→</span><span class="good">18 orchestrated agent teams</span></div>
+    <div class="comparison-row"><span class="bad">Textbook exercises</span><span class="arrow">→</span><span class="good">Real products, real users</span></div>
+    <div class="comparison-row"><span class="bad">English-only</span><span class="arrow">→</span><span class="good">Bilingual EN/RO from day one</span></div>
+  </div>
+</div>
+
+<!-- SLIDE 4: How it works -->
+<div class="slide" id="s4">
+  <span class="slide-number">04 / 10</span>
+  <p class="tag tag-amber">How It Works</p>
+  <h2 style="margin-bottom:32px;">The Forge Loop</h2>
+  <div class="feature-grid">
+    <div class="feature"><div class="icon" style="background:rgba(245,158,11,.1);">💡</div><div><h4>1. Describe your idea</h4><p>Any ambition, any level.</p></div></div>
+    <div class="feature"><div class="icon" style="background:rgba(59,130,246,.1);">🤖</div><div><h4>2. AI creates roadmap</h4><p>Brief, features, stack, plan.</p></div></div>
+    <div class="feature"><div class="icon" style="background:rgba(16,185,129,.1);">💻</div><div><h4>3. Agents build code</h4><p>Real files, real code, real tools.</p></div></div>
+    <div class="feature"><div class="icon" style="background:rgba(168,85,247,.1);">🎓</div><div><h4>4. Detect → Teach → Repeat</h4><p>Gaps found, lessons injected.</p></div></div>
+  </div>
+  <div class="card" style="margin-top:24px; text-align: center; max-width: 600px;">
+    <p style="font-size: 14px; color: var(--text);">🔥 Every concept is taught in the context of <strong>your</strong> project. No abstract exercises.</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: Product screenshot -->
+<div class="slide" id="s5">
+  <span class="slide-number">05 / 10</span>
+  <p class="tag tag-amber">Product</p>
+  <h2 style="margin-bottom:32px;">Three systems working together</h2>
+  <div class="grid-3">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🤖</div>
+      <h3 style="font-size:18px;margin-bottom:8px;">Agent Workspace</h3>
+      <p>18 specialized agents. Cursor-like editor. File tree. Live preview. Real code output.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🎓</div>
+      <h3 style="font-size:18px;margin-bottom:8px;">Adaptive Learning</h3>
+      <p>Skill graph. Weakness detection. Just-in-time lessons. 10 courses bilingual EN/RO.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🚀</div>
+      <h3 style="font-size:18px;margin-bottom:8px;">Builder Engine</h3>
+      <p>Idea → brief → MVP → launch. 10 templates. Deployment guidance. Founder playbook.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px; text-align:center;max-width:600px;">
+    <p style="font-size:12px;color:var(--muted);">Stack: Next.js · TypeScript · Tailwind · Zustand · OpenRouter · Tauri · PWA</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: Market -->
+<div class="slide" id="s6">
+  <span class="slide-number">06 / 10</span>
+  <p class="tag tag-amber">Market</p>
+  <h2 style="margin-bottom:32px;">Where EdTech meets AI Agents</h2>
+  <div class="grid-4">
+    <div class="stat"><div class="number">400B€</div><div class="label">e-learning by 2028</div></div>
+    <div class="stat"><div class="number">70B€</div><div class="label">AI productivity by 2028</div></div>
+    <div class="stat"><div class="number">15M</div><div class="label">EU aspiring builders</div></div>
+    <div class="stat"><div class="number">150M€</div><div class="label">EdTech CEE market</div></div>
+  </div>
+  <div class="card" style="margin-top:32px; max-width: 700px; text-align: center;">
+    <p style="font-size:14px;line-height:1.7;">Forge sits at the intersection of <strong style="color:var(--amber)">EdTech</strong>, <strong style="color:var(--blue)">AI/DeepTech</strong>, <strong style="color:var(--green)">Digital Inclusion</strong>, and <strong style="color:var(--purple)">European Language Preservation</strong>.</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:12px;">Qualifies for EU grants, Romanian Start-Up Nation, university incubators, and angel investment.</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: Competitive -->
+<div class="slide" id="s7">
+  <span class="slide-number">07 / 10</span>
+  <p class="tag tag-amber">Competition</p>
+  <h2 style="margin-bottom:32px;">We're not a chatbot.<br>We're not a course platform.</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;">They miss:</h3>
+      <p>❌ Cursor/Copilot → assume proficiency</p>
+      <p>❌ Udemy/Codecademy → learning ≠ building</p>
+      <p>❌ Bubble/Webflow → can't handle complex logic</p>
+      <p>❌ Devin/Bolt → black box, teach nothing</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;">We combine:</h3>
+      <p>✅ Agent orchestration</p>
+      <p>✅ Adaptive learning engine</p>
+      <p>✅ Real product workflows</p>
+      <p>✅ Founder guidance</p>
+      <p>✅ Bilingual from day one</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Business Model -->
+<div class="slide" id="s8">
+  <span class="slide-number">08 / 10</span>
+  <p class="tag tag-amber">Business Model</p>
+  <h2 style="margin-bottom:32px;">Freemium that funds itself</h2>
+  <div class="pricing">
+    <div class="price-card">
+      <div class="tier">Free</div>
+      <div class="price">0€<span>/mo</span></div>
+      <ul><li>1 project</li><li>3 agents/day</li><li>3 courses</li><li>Community</li></ul>
+    </div>
+    <div class="price-card featured">
+      <div class="tier">Builder</div>
+      <div class="price">10€<span>/mo</span></div>
+      <ul><li>Unlimited projects</li><li>All 18 agents</li><li>All content</li><li>Books + Prompts</li></ul>
+    </div>
+    <div class="price-card">
+      <div class="tier">Pro</div>
+      <div class="price">29€<span>/mo</span></div>
+      <ul><li>Everything in Builder</li><li>Priority agents</li><li>Custom templates</li><li>Deployment tools</li></ul>
+    </div>
+  </div>
+  <p style="margin-top:20px;font-size:13px;color:var(--muted);">Year 3 target: 15,000 users → 2.7M€ ARR + marketplace + enterprise</p>
+</div>
+
+<!-- SLIDE 9: Traction & Roadmap -->
+<div class="slide" id="s9">
+  <span class="slide-number">09 / 10</span>
+  <p class="tag tag-amber">Roadmap</p>
+  <h2 style="margin-bottom:32px;">From MVP to Market Leader</h2>
+  <div class="timeline">
+    <div class="timeline-item"><span class="date">Q2 2026</span><div class="dot"></div><div class="content"><h4>Launch Waitlist</h4><p>Landing page, community, first 100 signups</p></div></div>
+    <div class="timeline-item"><span class="date">Q3 2026</span><div class="dot"></div><div class="content"><h4>MVP + First Users</h4><p>AI tutor, agent workspace, learning engine, 500 MAU</p></div></div>
+    <div class="timeline-item"><span class="date">Q4 2026</span><div class="dot"></div><div class="content"><h4>University Partnerships</h4><p>3+ Romanian universities, first paid users, 2K MAU</p></div></div>
+    <div class="timeline-item"><span class="date">Q1 2027</span><div class="dot"></div><div class="content"><h4>Seed Round</h4><p>200K€ seed, 5K MAU, 5K€ MRR</p></div></div>
+    <div class="timeline-item"><span class="date">Q2 2027</span><div class="dot"></div><div class="content"><h4>EU Expansion</h4><p>EN-first EU launch, 15K users, marketplace live</p></div></div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Ask -->
+<div class="slide" id="s10">
+  <span class="slide-number">10 / 10</span>
+  <div class="cta-final">
+    <div style="font-size:48px;margin-bottom:16px;">🔥</div>
+    <h1>Let's build the future<br>of building.</h1>
+    <p class="subtitle">Seeking: 50K-200K€ pre-seed · Grant applications (Start-Up Nation, EIC) · University partnerships</p>
+    <p class="email">kodesweb3 — Forge Builder OS</p>
+    <p style="margin-top:24px;font-size:13px;color:var(--muted);">forge.builder · coming soon</p>
+  </div>
+</div>
+
+<div class="nav" id="nav"></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('nav');
+slides.forEach((s, i) => {
+  const btn = document.createElement('button');
+  btn.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+  if (i === 0) btn.classList.add('active');
+  nav.appendChild(btn);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(slides).indexOf(entry.target);
+      nav.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => observer.observe(s));
+
+document.addEventListener('keydown', (e) => {
+  const current = Array.from(slides).findIndex(s => s.getBoundingClientRect().top >= -100);
+  if (e.key === 'ArrowDown' && current < slides.length - 1) slides[current + 1].scrollIntoView({ behavior: 'smooth' });
+  if (e.key === 'ArrowUp' && current > 0) slides[current - 1].scrollIntoView({ behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
