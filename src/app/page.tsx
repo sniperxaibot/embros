@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useForgeStore } from '../store/index'
-import { Flame, Zap, Bot, Rocket, Target, Code2, BookOpen, ArrowRight, Menu, X, Plus, FolderOpen, MessageSquare, ChevronRight, Lightbulb } from 'lucide-react'
+import { Flame, Zap, Bot, Rocket, Target, Code2, BookOpen, ArrowRight, Menu, X, Plus, FolderOpen, MessageSquare, ChevronRight, Lightbulb, Mail, CheckCircle, Users, Cpu, GraduationCap, Globe } from 'lucide-react'
 import IDEPanel from '../components/IDEPanel'
 
 export default function Page() {
@@ -20,6 +20,15 @@ export default function Page() {
 
 function LandingPage({ onStart }: { onStart: () => void }) {
   const [mobileMenu, setMobileMenu] = useState(false)
+  const [showWaitlist, setShowWaitlist] = useState(false)
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    fetch('/api/waitlist')
+      .then(r => r.json())
+      .then(d => setWaitlistCount(d.count))
+      .catch(() => {})
+  }, [])
   return (
     <div className="min-h-screen">
       <nav className="fixed top-0 inset-x-0 z-50 border-b border-[#252529] bg-[#0a0a0b]/90 backdrop-blur-xl">
@@ -29,44 +38,62 @@ function LandingPage({ onStart }: { onStart: () => void }) {
             <span className="text-lg font-bold tracking-tight">forge</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-[#94949c]">
-            <a href="#features" className="hover:text-[#e2e2e7]">Features</a>
+            <a href="#what" className="hover:text-[#e2e2e7]">What is Forge</a>
             <a href="#how" className="hover:text-[#e2e2e7]">How it works</a>
-            <a href="#courses" className="hover:text-[#e2e2e7]">Courses</a>
+            <a href="#features" className="hover:text-[#e2e2e7]">Features</a>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={onStart} className="btn-primary text-sm"><Flame className="w-4 h-4" /> Start Building</button>
+            <button onClick={() => setShowWaitlist(true)} className="btn-primary text-sm"><Mail className="w-4 h-4" /> Join Waitlist</button>
             <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 hover:bg-[#1a1a1e] rounded">{mobileMenu ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}</button>
           </div>
         </div>
         {mobileMenu && (
           <div className="md:hidden border-t border-[#252529] bg-[#111113] px-4 py-3 space-y-2">
-            <a href="#features" onClick={() => setMobileMenu(false)} className="block py-2 text-sm text-[#94949c]">Features</a>
+            <a href="#what" onClick={() => setMobileMenu(false)} className="block py-2 text-sm text-[#94949c]">What is Forge</a>
             <a href="#how" onClick={() => setMobileMenu(false)} className="block py-2 text-sm text-[#94949c]">How it works</a>
-            <a href="#courses" onClick={() => setMobileMenu(false)} className="block py-2 text-sm text-[#94949c]">Courses</a>
+            <a href="#features" onClick={() => setMobileMenu(false)} className="block py-2 text-sm text-[#94949c]">Features</a>
           </div>
         )}
       </nav>
+
+      {/* ═══ HERO ═══ */}
       <section className="pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#252529] text-xs text-[#94949c] mb-6 sm:mb-8"><Zap className="w-3.5 h-3.5 text-[#f59e0b]" /> AI-Powered Builder Platform</div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-4 sm:mb-6">Anyone can build<br /><span className="text-[#f59e0b]">software now.</span></h1>
-          <p className="text-base sm:text-lg md:text-xl text-[#6b6b73] max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed">Forge is an AI-native builder platform that helps anyone go from idea to launched product. No coding experience needed.</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#252529] text-xs text-[#94949c] mb-6 sm:mb-8"><Cpu className="w-3.5 h-3.5 text-[#f59e0b]" /> AI Builder Operating System</div>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-4 sm:mb-6">
+            Build real products<br /><span className="text-[#f59e0b]">with AI agents.</span>
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-[#6b6b73] max-w-2xl mx-auto mb-4 leading-relaxed">
+            Forge is an AI Builder Operating System that teaches you to build real products with AI agents, adapting automatically to what you need.
+          </p>
+          <p className="text-sm text-[#45454c] max-w-lg mx-auto mb-8 sm:mb-10">
+            Not a chatbot. Not a course platform. Not another IDE. An operating system for the next generation of builders.
+          </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button onClick={onStart} className="btn-primary w-full sm:w-auto text-base"><Flame className="w-5 h-5" /> Start Building - Free</button>
-            <a href="#how" className="btn-secondary w-full sm:w-auto">See how it works</a>
+            <button onClick={() => setShowWaitlist(true)} className="btn-primary w-full sm:w-auto text-base"><Mail className="w-5 h-5" /> Join the Waitlist</button>
+            <a href="#what" className="btn-secondary w-full sm:w-auto">What is Forge?</a>
           </div>
-          <p className="text-xs text-[#45454c] mt-6">Web - Windows - macOS - Linux - iOS - Android</p>
+          <div className="flex items-center justify-center gap-6 mt-8 text-xs text-[#45454c]">
+            <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" /> {waitlistCount !== null ? `${waitlistCount} builders` : '... builders'}</span>
+            <span className="flex items-center gap-1.5"><Bot className="w-3.5 h-3.5" /> 18 AI agents</span>
+            <span className="flex items-center gap-1.5"><Globe className="w-3.5 h-3.5" /> EN + RO</span>
+          </div>
         </div>
       </section>
-      <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
+
+      {/* ═══ WHAT IS FORGE ═══ */}
+      <section id="what" className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">What is Forge?</h2>
-          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">Three powerful systems working together to make you a builder.</p>
-          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">What Forge Is</h2>
+            <p className="text-[#6b6b73] max-w-xl mx-auto">Four systems working together so you can go from idea to shipped product.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             {[
-              { icon: <Code2 className="w-5 h-5" />, title: 'AI Workspace', desc: 'A Cursor-like editor where AI agents write code, create files, and build features while you learn.', color: '#f59e0b' },
-              { icon: <Target className="w-5 h-5" />, title: 'Adaptive Learning', desc: 'Forge detects what you need and teaches it at the right moment. Not courses - just-in-time lessons.', color: '#3b82f6' },
-              { icon: <Rocket className="w-5 h-5" />, title: 'Launch System', desc: 'From idea to product brief to deployed app. AI agents handle the technical heavy lifting.', color: '#10b981' },
+              { icon: <Bot className="w-5 h-5" />, title: 'Agent Workspace', desc: '18 AI agents that write code, plan architecture, debug, and teach — collaborating on your project like a real dev team.', color: '#f59e0b' },
+              { icon: <Target className="w-5 h-5" />, title: 'Adaptive Learning', desc: 'Forge detects your knowledge gaps and delivers lessons exactly when you need them. Not courses — just-in-time education.', color: '#3b82f6' },
+              { icon: <Code2 className="w-5 h-5" />, title: 'Builder Engine', desc: 'Your idea becomes a project brief, feature list, tech stack, and roadmap — then agents start building.', color: '#10b981' },
+              { icon: <GraduationCap className="w-5 h-5" />, title: 'Content Ecosystem', desc: '10 courses, 5 books, reusable prompts, and project templates — all bilingual English/Romanian.', color: '#a855f7' },
             ].map(f => (
               <div key={f.title} className="p-6 rounded-xl border border-[#252529] bg-[#111113] hover:bg-[#1a1a1e] transition-colors">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: f.color + '15' }}><span style={{ color: f.color }}>{f.icon}</span></div>
@@ -77,34 +104,18 @@ function LandingPage({ onStart }: { onStart: () => void }) {
           </div>
         </div>
       </section>
+
+      {/* ═══ THE FORGE LOOP ═══ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">Who is Forge for?</h2>
-          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">If you have an idea, Forge is for you.</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { emoji: '🎓', title: 'Students', desc: 'Learn by building real projects, not watching tutorials.' },
-              { emoji: '💼', title: 'Professionals', desc: 'Build tools and products without going back to school.' },
-              { emoji: '🔄', title: 'Career Changers', desc: 'Transition into tech by actually building, not just studying.' },
-              { emoji: '💡', title: 'Founders', desc: 'Validate ideas and ship MVPs in days, not months.' },
-            ].map(p => (
-              <div key={p.title} className="p-5 rounded-xl border border-[#252529] bg-[#111113] text-center">
-                <div className="text-3xl mb-3">{p.emoji}</div>
-                <h3 className="font-semibold mb-1">{p.title}</h3>
-                <p className="text-xs text-[#6b6b73]">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section id="how" className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 sm:mb-14">How it works</h2>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">How It Works</h2>
+          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">One loop. Idea to shipped product.</p>
           {[
-            { n: '01', t: 'Describe your idea', d: 'Tell Forge what you want to build. Any idea, any ambition.', icon: Lightbulb },
-            { n: '02', t: 'AI creates your project', d: 'Agents generate real files with real code. HTML, CSS, JavaScript, React.', icon: Bot },
-            { n: '03', t: 'Build and learn', d: 'Edit, customize, ask questions. Learn by doing, not watching.', icon: Code2 },
-            { n: '04', t: 'Ship it', d: 'Deploy anywhere. Your code, your product, your users.', icon: Rocket },
+            { n: '01', t: 'Describe your idea', d: 'Tell Forge what you want to build. Any ambition, any level.', icon: Lightbulb },
+            { n: '02', t: 'AI creates your roadmap', d: 'Agents generate a project brief, feature list, tech stack, and build plan.', icon: Bot },
+            { n: '03', t: 'Build and learn', d: 'Agents write real code. You edit, customize, learn by doing.', icon: Code2 },
+            { n: '04', t: 'Detect → Teach → Repeat', d: 'Forge detects gaps, injects lessons, tracks skills. The loop compounds.', icon: Target },
+            { n: '05', t: 'Ship it', d: 'Deploy anywhere. Your product, your users, your revenue.', icon: Rocket },
           ].map(s => (
             <div key={s.n} className="flex gap-4 sm:gap-6 mb-8 sm:mb-10 last:mb-0">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-[#111113] border border-[#252529] flex items-center justify-center"><s.icon className="w-5 h-5 text-[#f59e0b]" /></div>
@@ -117,10 +128,73 @@ function LandingPage({ onStart }: { onStart: () => void }) {
           ))}
         </div>
       </section>
-      <section id="courses" className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
+
+      {/* ═══ WHY FORGE IS DIFFERENT ═══ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10 sm:mb-14">Why Forge is different</h2>
+          <div className="space-y-4">
+            {[
+              { bad: 'Learn to code first', good: 'Build first, learn what you need' },
+              { bad: 'Static courses', good: 'Adaptive learning that detects gaps' },
+              { bad: 'Single AI chat', good: '18 orchestrated agent teams' },
+              { bad: 'Textbook exercises', good: 'Real products, real users' },
+              { bad: 'English-only', good: 'Bilingual EN/RO from day one' },
+            ].map((r, i) => (
+              <div key={i} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 p-4 rounded-xl border border-[#252529] bg-[#111113]">
+                <span className="text-sm text-[#ef4444] line-through shrink-0">{r.bad}</span>
+                <ArrowRight className="w-4 h-4 text-[#45454c] shrink-0 hidden sm:block" />
+                <span className="text-sm text-[#10b981] font-medium">{r.good}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ WHO IS FOR ═══ */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">Who is Forge for?</h2>
+          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">If you have an idea, Forge is for you.</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { emoji: '🎓', title: 'Students' },
+              { emoji: '💼', title: 'Professionals' },
+              { emoji: '🔄', title: 'Career Changers' },
+              { emoji: '💡', title: 'Founders' },
+              { emoji: '🌍', title: 'Non-technical' },
+            ].map(p => (
+              <div key={p.title} className="p-5 rounded-xl border border-[#252529] bg-[#111113] text-center">
+                <div className="text-3xl mb-3">{p.emoji}</div>
+                <h3 className="font-semibold">{p.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CONTENT ═══ */}
+      <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3">Learn while building</h2>
-          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">10 courses with real content. Bilingual English/Romanian.</p>
+          <p className="text-[#6b6b73] text-center max-w-lg mx-auto mb-10 sm:mb-14">Real content, not placeholders. Bilingual English/Romanian.</p>
+          <div className="grid sm:grid-cols-3 gap-4 mb-6">
+            <div className="p-5 rounded-xl border border-[#252529] bg-[#111113] text-center">
+              <div className="text-3xl mb-2">📚</div>
+              <div className="text-2xl font-bold text-[#f59e0b]">10</div>
+              <div className="text-sm text-[#6b6b73]">Courses</div>
+            </div>
+            <div className="p-5 rounded-xl border border-[#252529] bg-[#111113] text-center">
+              <div className="text-3xl mb-2">📖</div>
+              <div className="text-2xl font-bold text-[#3b82f6]">5</div>
+              <div className="text-sm text-[#6b6b73]">Books</div>
+            </div>
+            <div className="p-5 rounded-xl border border-[#252529] bg-[#111113] text-center">
+              <div className="text-3xl mb-2">🤖</div>
+              <div className="text-2xl font-bold text-[#10b981]">18</div>
+              <div className="text-sm text-[#6b6b73]">AI Agents</div>
+            </div>
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { title: 'AI Builder Foundations', emoji: '🏗️' },
@@ -138,17 +212,102 @@ function LandingPage({ onStart }: { onStart: () => void }) {
           </div>
         </div>
       </section>
+
+      {/* ═══ FINAL CTA ═══ */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-[#252529]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to forge something?</h2>
-          <p className="text-[#6b6b73] mb-6 sm:mb-8">Open the editor, describe your idea, and start building. It's free.</p>
-          <button onClick={onStart} className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"><Flame className="w-5 h-5" /> Open Forge - Free</button>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to forge something real?</h2>
+          <p className="text-[#6b6b73] mb-6 sm:mb-8">Join the waitlist. Be first when we launch.</p>
+          <button onClick={() => setShowWaitlist(true)} className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"><Mail className="w-5 h-5" /> Join the Waitlist</button>
+          <p className="text-xs text-[#45454c] mt-6">Free tier available at launch.</p>
         </div>
       </section>
+
       <footer className="border-t border-[#252529] py-8 px-4 text-center">
-        <p className="text-sm text-[#45454c] mb-2">Forge v0.2.0 - Where ideas become software.</p>
-        <p className="text-xs text-[#252529]">Bilingual: English | Romana</p>
+        <p className="text-sm text-[#45454c] mb-2">Forge — AI Builder Operating System</p>
+        <p className="text-xs text-[#252529]">English | Romana</p>
       </footer>
+
+      {/* ═══ WAITLIST MODAL ═══ */}
+      {showWaitlist && <WaitlistModal onClose={() => setShowWaitlist(false)} />}
+    </div>
+  )
+}
+
+function WaitlistModal({ onClose }: { onClose: () => void }) {
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async () => {
+    if (!email.trim() || !email.includes('@')) {
+      setError('Please enter a valid email.')
+      return
+    }
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), name: name.trim() }),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        const data = await res.json()
+        setError(data.error || 'Something went wrong. Try again.')
+      }
+    } catch {
+      setError('Network error. Try again.')
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-[#111113] border border-[#252529] rounded-2xl p-6 sm:p-8 w-full max-w-md">
+        <button onClick={onClose} className="absolute top-4 right-4 p-1 hover:bg-[#1a1a1e] rounded text-[#6b6b73] hover:text-[#e2e2e7]"><X className="w-5 h-5" /></button>
+        {submitted ? (
+          <div className="text-center py-4">
+            <CheckCircle className="w-16 h-16 text-[#10b981] mx-auto mb-4" />
+            <h3 className="text-xl font-bold mb-2">You&apos;re on the list!</h3>
+            <p className="text-[#6b6b73] text-sm mb-4">We&apos;ll email you when Forge is ready. You&apos;re builder #{Date.now() % 10000}.</p>
+            <button onClick={onClose} className="btn-secondary">Close</button>
+          </div>
+        ) : (
+          <>
+            <div className="w-12 h-12 rounded-xl bg-[#f59e0b]/15 flex items-center justify-center mb-4"><Mail className="w-6 h-6 text-[#f59e0b]" /></div>
+            <h3 className="text-xl font-bold mb-1">Join the Forge waitlist</h3>
+            <p className="text-[#6b6b73] text-sm mb-6">Be first to get access. Free tier at launch.</p>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-sm font-medium mb-1.5">
+                  Email <span className="text-[#ef4444]">*</span>
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => { setEmail(e.target.value); setError('') }}
+                  placeholder="your@email.com"
+                  className="w-full bg-[#0a0a0b] border border-[#252529] rounded-lg px-4 py-3 text-sm outline-none focus:border-[#f59e0b] placeholder:text-[#45454c]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1.5">Name (optional)</label>
+                <input
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder="What should we call you?"
+                  className="w-full bg-[#0a0a0b] border border-[#252529] rounded-lg px-4 py-3 text-sm outline-none focus:border-[#f59e0b] placeholder:text-[#45454c]"
+                />
+              </div>
+              {error && <p className="text-xs text-[#ef4444]">{error}</p>}
+              <button onClick={handleSubmit} className="btn-primary w-full mt-2">Join Waitlist</button>
+            </div>
+            <p className="text-[10px] text-[#45454c] text-center mt-4">No spam. Unsubscribe anytime.</p>
+          </>
+        )}
+      </div>
     </div>
   )
 }
@@ -279,6 +438,19 @@ function DashboardPage() {
 
 function IDEPanelPage() {
   const { activeProject, setView, updateProject } = useForgeStore()
+  const [isInitialized, setIsInitialized] = useState(false)
+
+  // Handle hydration mismatch from persisted store
+  useEffect(() => {
+    setIsInitialized(true)
+  }, [])
+
+  // During initial render (server), show loading state
+  // After hydration (client), check if we have a project
+  if (!isInitialized) {
+    return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><p className="text-[#6b6b73] mb-4">Loading...</p></div></div>
+  }
+
   if (!activeProject) return <div className="min-h-screen flex items-center justify-center"><div className="text-center"><p className="text-[#6b6b73] mb-4">No project selected</p><button onClick={() => setView('dashboard')} className="btn-primary">Back to Dashboard</button></div></div>
   return (
     <IDEPanel

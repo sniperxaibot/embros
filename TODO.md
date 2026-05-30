@@ -16,7 +16,9 @@
 - [x] Dark-first UI with amber accent (#f59e0b)
 - [x] Build compiles clean (Next.js 14)
 
-## v0.3.0 - Enhanced Workspace (NEXT)
+## v0.3.0 - Enhanced Workspace (IN PROGRESS)
+- [x] Landing page redesigned with "AI Builder OS" positioning
+- [x] Waitlist system with API + modal + counter
 - [ ] Full Monaco editor integration in IDE panel
 - [ ] File tree with create/edit/delete operations
 - [ ] AI chat with real OpenRouter responses
