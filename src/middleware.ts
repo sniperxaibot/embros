@@ -8,7 +8,7 @@ import { createMiddlewareClient } from '@/lib/supabase-middleware'
 const PROTECTED_PREFIXES = ['/dashboard', '/workspace', '/learn', '/onboarding', '/settings', '/profile']
 
 // Routes that are always accessible
-const PUBLIC_PATHS = ['/', '/login', '/register', '/auth/callback']
+const PUBLIC_PATHS = ['/', '/auth/login', '/auth/register', '/auth/callback']
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
