@@ -4,38 +4,87 @@
 
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { color-scheme: dark; -webkit-tap-highlight-color: transparent; }
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
   body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: #0a0a0b; color: #e2e2e7;
-    min-height: 100vh; -webkit-font-smoothing: antialiased;
+    font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+    background: #0a0a0b;
+    color: #e2e2e7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overscroll-behavior: none;
+  }
+  ::selection {
+    background: #f59e0b30;
+    color: #f59e0b;
   }
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #323238; border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: #45454c; }
-  input, textarea { font-size: 16px; } { /* Prevent iOS zoom */ }
+  input, textarea { font-size: 16px; } /* Prevent iOS zoom */
 }
 
 @layer components {
   .btn-primary {
-    background: #f59e0b; color: #0a0a0b; font-weight: 600;
-    padding: 0.625rem 1.25rem; border-radius: 0.5rem; border: none;
-    cursor: pointer; font-size: 0.875rem; transition: all 0.15s;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    white-space: nowrap; min-height: 44px; /* Touch target */
+    background: #f59e0b;
+    color: #0a0a0b;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    min-height: 44px;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
   }
   .btn-primary:hover { background: #fbbf24; }
   .btn-primary:active { transform: scale(0.98); }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .btn-secondary {
-    background: #1a1a1e; color: #e2e2e7; font-weight: 500;
-    padding: 0.625rem 1.25rem; border-radius: 0.5rem;
-    border: 1px solid #252529; cursor: pointer; font-size: 0.875rem;
-    transition: all 0.15s; display: inline-flex; align-items: center; gap: 0.5rem;
-    white-space: nowrap; min-height: 44px;
+    background: #1a1a1e;
+    color: #e2e2e7;
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid #252529;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    min-height: 44px;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
   }
   .btn-secondary:hover { background: #252529; }
+
+  .font-mono {
+    font-family: var(--font-mono), 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}
+
+@layer utilities {
+  .font-sans {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }

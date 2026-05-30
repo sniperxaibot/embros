@@ -1,8 +1,8 @@
 # FORGE — PRODUCT THESIS.md
 
-## Product Thesis
+## One-Liner
 
-**Forge** is an **AI Builder Operating System** that teaches anyone — from complete beginners to professionals — to build real digital products with AI agents, by automatically adapting education and workflow to each user's progress.
+**Forge is not another AI chatbot. It's an AI Builder Operating System that adapts education and workflow to each user's progress.**
 
 ---
 
@@ -28,20 +28,19 @@ Three convergences make this possible **today**:
 
 ---
 
-## Market Insight
+## Market
 
-### TAM (Total Addressable Market)
-- **Global e-learning**: $400B+ by 2028
-- **Low-code/no-code**: $187B by 2030
-- **AI productivity tools**: $70B+ by 2028
+| Segment | Size |
+|---------|------|
+| Global EdTech | $400B+ by 2028 |
+| Low-code/No-code | $187B by 2030 |
+| AI Productivity Tools | $70B+ by 2028 |
+| **Combined TAM** | **$120B+ addressable** |
 
-### SAM (Serviceable Addressable Market)
-- EU + Romania aspiring builders, career changers, non-technical founders
-- ~15M people aged 18-45 who "want to build something" but can't code
+**SAM**: EU + Romania aspiring builders, career changers, non-technical founders (~15M people 18-45)
 
-### SOM (Serviceable Obtainable Market)
-- Year 1: 1,000 paying users × $15/mo = $180K ARR
-- Year 3: 15,000 users = $2.7M ARR
+**SOM Year 1**: 1,000 paying users × $15/mo = $180K ARR
+**SOM Year 3**: 15,000 users = $2.7M ARR
 
 ---
 
@@ -53,13 +52,28 @@ Three convergences make this possible **today**:
 | **Cursor / GitHub Copilot** | AI code editor | No learning system, no beginners |
 | **Bubble / Webflow** | No-code builder | No AI agents, limited complexity |
 | **Replit** | Online IDE | No learning path, no agent orchestration |
-| **Relevance AI / Flowise** | Agent builders | Too technical, no education layer |
+| **ChatGPT / Claude** | AI chat | No workspace, no persistent projects |
 
 **Forge's unique position**: The only platform that is simultaneously:
 - A builder workspace (Cursor-like)
-- An adaptive school (like a personal tutor)
-- An AI agent operating system (orchestrated agents)
+- An adaptive school (personal tutor)
+- An AI agent operating system (orchestrated team)
 - A founder toolkit (idea → launch)
+
+---
+
+## Differentiation
+
+| Dimension | Static Courses | Raw Code Gen | Forge |
+|-----------|---------------|-------------|-------|
+| Adaptive learning | ❌ | ❌ | ✅ |
+| Agent orchestration | ❌ | ❌ | ✅ |
+| Project-based | ❌ | Partial | ✅ |
+| Weakness detection | ❌ | ❌ | ✅ |
+| Mentorship model | ❌ | ❌ | ✅ |
+| Beginner-friendly | Partial | ❌ | ✅ |
+| Real products shipped | ❌ | Partial | ✅ |
+| Bilingual (EN/RO) | ❌ | ❌ | ✅ |
 
 ---
 
@@ -70,9 +84,12 @@ Three convergences make this possible **today**:
 | Tier | Price | Includes |
 |------|-------|----------|
 | **Free** | $0 | 1 project, 3 agents/day, 3 courses, community access |
-| **Builder** | $10/mo | Unlimited projects, all agents, all courses, books, prompts |
-| **Pro** | $29/mo | Everything + priority agents, custom templates, deployment tools, API access |
-| **Team** | $99/mo | Multi-user, shared projects, admin dashboard, SSO |
+| **Pro** | $15/mo ($12/mo annual) | Unlimited projects, all 18 agents, all content, priority processing, deployment tools |
+
+### Revenue Milestones
+- **Month 6**: $10K MRR (700 Pro users)
+- **Month 12**: $50K MRR (3,300 Pro users)
+- **Year 2**: $200K MRR (agent marketplace + enterprise)
 
 ### Revenue Diversification (Year 2+)
 - Agent marketplace (third-party agents, rev share)
@@ -86,7 +103,7 @@ Three convergences make this possible **today**:
 
 ### Phase 1: Community (Months 1-3)
 - Launch waitlist with founder story
-- Build in public on Twitter/X, LinkedIn
+- Build in public on Twitter/X, LinkedIn, TikTok
 - Discord community for early testers
 - Content: "I built X with Forge" case studies
 
@@ -104,30 +121,25 @@ Three convergences make this possible **today**:
 
 ---
 
-## Grant & Funding Strategy
+## Traction Targets (12 Months)
 
-Forge qualifies for multiple EU/Romanian programs because it sits at the intersection of:
-- **EdTech** (adaptive learning)
-- **AI/DeepTech** (agent orchestration)
-- **Digital inclusion** (democratizing building)
-- **Romanian language support** (cultural/linguistic preservation)
-
-Target programs:
-- **SME Instrument / EIC Accelerator** (EU)
-- **Start-Up Nation Romania** (government)
-- **Digital Europe Programme** (EU)
-- **Incubatoare universitare** (ROM)
-- **Investitori business angels**
+- ✅ 1,000 waitlist signups
+- ✅ 200 monthly active users
+- ✅ 50 products shipped by users
+- ✅ €50K in grants secured
+- ✅ €10K MRR
+- ✅ 1 university partnership
+- ✅ 10,000 Discord members
 
 ---
 
 ## Technical Moat
 
-1. **Adaptive Learning Graph** — proprietary skill graph that maps project types to needed skills
-2. **Agent Orchestration Protocol** — custom protocol for delegating tasks across specialized agents
+1. **Adaptive Learning Graph** — proprietary skill graph mapping project types to needed skills
+2. **Agent Orchestration Protocol** — custom protocol for delegating tasks across 18+ specialized agents
 3. **Project Memory** — every project teaches the system about user patterns
 4. **Bilingual Content Engine** — content generated once, delivered in EN/RO with cultural adaptation
-5. **Weakness Detection** — identifies what the user doesn't know by analyzing their interactions
+5. **Weakness Detection** — identifies knowledge gaps by analyzing user interactions
 
 ---
 
@@ -143,22 +155,18 @@ Target programs:
 
 ---
 
-## Definition of Success (12 months)
+## Grant & Funding
 
-- ✅ 1,000 waitlist signups
-- ✅ 200 monthly active users
-- ✅ 50 products shipped by users
-- ✅ €50K in grants secured
-- ✅ €10K MRR
-- ✅ 1 university partnership
-- ✅ 10,000 Discord members
+Forge qualifies for EU/Romanian programs at the intersection of:
+- **EdTech** (adaptive learning)
+- **AI/DeepTech** (agent orchestration)
+- **Digital inclusion** (democratizing building)
+- **Romanian language support** (cultural preservation)
 
----
-
-## The One-Liner
-
-**Forge is the AI Builder Operating System — the platform that teaches you to build real products with AI agents, adapting automatically to what you need, when you need it.**
+Target: SME Instrument / EIC Accelerator, Start-Up Nation Romania, Digital Europe Programme
 
 ---
 
 *This thesis is the foundation for all strategic decisions at Forge. When in doubt, return here.*
+
+*Forge — Build What You Imagine.*

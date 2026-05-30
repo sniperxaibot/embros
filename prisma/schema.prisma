@@ -200,3 +200,11 @@ model Template {
   isPublic      Boolean  @default(true)
   createdAt     DateTime @default(now())
 }
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  source    String   @default("landing-page")
+  createdAt DateTime @default(now())
+}
