@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       description: body.description || '',
       idea: body.idea || '',
       template: body.template || null,
-      techStack: JSON.stringify(body.techStack || []),
+      techStack: body.techStack || [],
     }
   })
 
