@@ -5,17 +5,18 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase-middleware'
 
 // Routes that require authentication
-const PROTECTED_PREFIXES = ['/dashboard', '/workspace', '/project', '/learn', '/onboarding', '/settings', '/profile']
+const PROTECTED_PREFIXES = ['/dashboard', '/project', '/learn', '/courses', '/settings']
 
-// Routes that are always accessible
-const PUBLIC_PATHS = ['/', '/auth/login', '/auth/register', '/auth/callback']
+// Routes that are always accessible (no auth required)
+const PUBLIC_PATHS = ['/', '/login', '/register', '/prompts', '/templates']
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow public paths and static assets
+  // Allow public paths, auth callbacks, API routes, and static assets
   if (
-    PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith('/auth/')) ||
+    PUBLIC_PATHS.some((p) => pathname === p) ||
+    pathname.startsWith('/auth/') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api/') ||
     pathname === '/favicon.svg' ||
