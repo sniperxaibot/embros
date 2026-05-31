@@ -88,7 +88,8 @@ function LandingPage({ onStart }: { onStart: () => void }) {
             <a href="#faq" className="hover:text-[#e2e2e7] transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => openWaitlist('nav')} className="btn-primary text-sm">Notify me</button>
+            <a href="/login" className="text-sm text-[#94949c] hover:text-[#e2e2e7] transition-colors hidden md:inline">Log in</a>
+            <a href="/register" className="btn-primary text-sm">Sign up</a>
             <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden p-2 hover:bg-[#1a1a1e] rounded-lg transition-colors">
               {mobileMenu ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -105,7 +106,8 @@ function LandingPage({ onStart }: { onStart: () => void }) {
             ].map(link => (
               <a key={link.href} href={link.href} onClick={() => setMobileMenu(false)} className="block text-sm text-[#94949c] hover:text-[#e2e2e7] py-2 transition-colors">{link.label}</a>
             ))}
-            <button onClick={() => { openWaitlist('mobile-nav'); setMobileMenu(false) }} className="btn-primary w-full mt-2">Notify me</button>
+            <a href="/login" onClick={() => setMobileMenu(false)} className="block text-sm text-[#94949c] hover:text-[#e2e2e7] py-2 transition-colors">Log in</a>
+            <a href="/register" onClick={() => setMobileMenu(false)} className="btn-primary w-full mt-2 text-center block">Sign up</a>
           </div>
         )}
       </nav>

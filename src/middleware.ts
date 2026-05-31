@@ -5,7 +5,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase-middleware'
 
 // Routes that require authentication
-const PROTECTED_PREFIXES = ['/dashboard', '/workspace', '/learn', '/onboarding', '/settings', '/profile']
+const PROTECTED_PREFIXES = ['/dashboard', '/workspace', '/project', '/learn', '/onboarding', '/settings', '/profile']
 
 // Routes that are always accessible
 const PUBLIC_PATHS = ['/', '/auth/login', '/auth/register', '/auth/callback']
