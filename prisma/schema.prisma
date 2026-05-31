@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 // ═══════════════════════════════════════════════════
-// FORGE - Database Schema (SQLite for development)
+// FORGE - Database Schema (PostgreSQL for production)
 // ═══════════════════════════════════════════════════
 
 model User {
@@ -18,7 +18,7 @@ model User {
   avatar        String?
   role          String   @default("builder")
   language      String   @default("en")
-  tier          String   @default("free") // free, pro, team
+  tier          String   @default("free")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -36,10 +36,10 @@ model Project {
   idea            String?
   status          String   @default("planning")
   template        String?
-  techStack       String   @default("") // JSON array as string
-  files           String   @default("[]") // JSON
-  roadmap         String   @default("[]") // JSON
-  assignedAgents  String   @default("[]") // JSON array as string
+  techStack       String[] @default([])
+  files           Json     @default("[]")
+  roadmap         Json     @default("[]")
+  assignedAgents  String[] @default([])
   isPublic        Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -57,7 +57,7 @@ model Course {
   icon            String?
   color           String?
   level           String   @default("beginner")
-  tags            String   @default("") // JSON array as string
+  tags            String[] @default([])
   totalLessons    Int      @default(0)
   estimatedHours  Int      @default(0)
   isPublished     Boolean  @default(false)
@@ -84,8 +84,8 @@ model Lesson {
   slug            String
   title           String
   titleRo         String?
-  content         String?
-  contentRo       String?
+  content         String?  @db.Text
+  contentRo       String?  @db.Text
   type            String   @default("explanation")
   estimatedMinutes Int     @default(15)
   order           Int      @default(0)
@@ -149,8 +149,8 @@ model BookChapter {
   bookId          String
   title           String
   titleRo         String?
-  content         String?
-  contentRo       String?
+  content         String?  @db.Text
+  contentRo       String?  @db.Text
   order           Int      @default(0)
 
   book            Book     @relation(fields: [bookId], references: [id])
@@ -170,10 +170,10 @@ model Conversation {
 model Message {
   id              String   @id @default(cuid())
   conversationId  String
-  role            String   // user, assistant, system
+  role            String
   content         String
   agentId         String?
-  toolCalls       String?  // JSON
+  toolCalls       Json?
   createdAt       DateTime @default(now())
 
   conversation    Conversation @relation(fields: [conversationId], references: [id])
@@ -191,10 +191,10 @@ model Prompt {
   id              String   @id @default(cuid())
   title           String
   titleRo         String?
-  content         String
-  contentRo       String?
+  content         String   @db.Text
+  contentRo       String?  @db.Text
   category        String
-  tags            String   @default("") // JSON array
+  tags            String[] @default([])
   platform        String   @default("openrouter")
   isPublic        Boolean  @default(true)
   createdAt       DateTime @default(now())
@@ -209,9 +209,9 @@ model Template {
   descriptionRo   String?
   icon            String?
   color           String?
-  techStack       String   @default("") // JSON array
+  techStack       String[] @default([])
   category        String   @default("web")
-  files           String   @default("[]") // JSON
+  files           Json     @default("[]")
   isPublic        Boolean  @default(true)
   createdAt       DateTime @default(now())
 }
