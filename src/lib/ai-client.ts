@@ -24,11 +24,11 @@ export interface AIOptions {
 // ─── OpenRouter Provider ───
 const OPENROUTER_API = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Model rotation: fast/cheap → powerful
+// Model rotation: use free/fast models
 const MODEL_TIERS = [
-  { id: 'google/gemini-2.0-flash-001', role: 'fast' },
+  { id: 'openrouter/owl-alpha', role: 'fast' },
   { id: 'openrouter/auto', role: 'auto' },
-  { id: 'anthropic/claude-sonnet-4', role: 'powerful' },
+  { id: 'google/gemini-2.0-flash-001', role: 'fallback' },
 ]
 
 let _modelIndex = 0

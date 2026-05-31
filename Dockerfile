@@ -7,9 +7,10 @@ RUN npm install --legacy-peer-deps
 
 COPY . .
 
-# Generate Prisma client BEFORE build
+# Generate Prisma client (needs schema only, no DB connection)
 RUN npx prisma generate
 
+# Build Next.js
 RUN npm run build
 
 EXPOSE 3000
