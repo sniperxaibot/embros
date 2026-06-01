@@ -1,7 +1,7 @@
 {
-  "name": "Forge",
-  "short_name": "Forge",
-  "description": "Build what you care about. Your adaptive AI mentor.",
+  "name": "EmbrOS",
+  "short_name": "EmbrOS",
+  "description": "Build what you imagine. Your adaptive AI builder team.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0b",

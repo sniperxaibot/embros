@@ -67,7 +67,7 @@ export default function PromptsPage() {
           <div className="w-7 h-7 rounded-lg bg-[#f59e0b] flex items-center justify-center">
             <Flame className="w-4 h-4 text-[#0a0a0b]" />
           </div>
-          <span className="font-bold text-sm tracking-tight">forge</span>
+          <span className="font-bold text-sm tracking-tight">embrOS</span>
         </div>
         <nav className="flex-1 py-4 px-3 space-y-1">
           {NAV_ITEMS.map((item) => {
@@ -102,7 +102,7 @@ export default function PromptsPage() {
               <div className="w-7 h-7 rounded-lg bg-[#f59e0b] flex items-center justify-center">
                 <Flame className="w-4 h-4 text-[#0a0a0b]" />
               </div>
-              <span className="font-bold text-sm tracking-tight">forge</span>
+              <span className="font-bold text-sm tracking-tight">embrOS</span>
             </div>
           </div>
         </header>

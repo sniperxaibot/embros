@@ -4,7 +4,8 @@ import { getBrowserClient } from '@/lib/supabase-safe'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Flame, ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowRight, Loader2 } from 'lucide-react'
+import { ForgeLogo, ForgeMark } from '@/components/ForgeLogo'
 
 export const dynamic = 'force-dynamic'
 
@@ -52,11 +53,8 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#0a0a0b] p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-[#f59e0b] flex items-center justify-center">
-              <Flame className="w-5 h-5 text-[#0a0a0b]" />
-            </div>
-            <span className="text-2xl font-bold">forge</span>
+          <div className="flex items-center justify-center mb-4">
+            <ForgeLogo markClass="w-8 h-8" wordClass="text-2xl" />
           </div>
           <h1 className="text-xl font-semibold mb-1">Welcome back</h1>
           <p className="text-sm text-[#6b6b73]">Sign in to continue building</p>
@@ -66,7 +64,7 @@ export default function LoginPage() {
           {magicLinkSent ? (
             <div className="text-center py-6">
               <div className="w-12 h-12 bg-[#f59e0b]/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Flame className="w-6 h-6 text-[#f59e0b]" />
+                <ForgeMark className="w-6 h-6" />
               </div>
               <h2 className="text-sm font-semibold mb-1">Check your email</h2>
               <p className="text-xs text-[#6b6b73]">Magic link sent to <span className="text-[#e2e2e7]">{email}</span></p>

@@ -1,4 +1,4 @@
-// FORGE - Full IDE Panel Component
+// EmbrOS - Full IDE Panel Component
 // Monaco editor, file tree, AI chat, live preview, tab management
 // Mobile-first responsive design
 
@@ -44,7 +44,7 @@ function FileIcon({ name, className }: { name: string; className?: string }) {
 // Starter project templates
 function makeTemplateFiles(template: string): FileNode[] {
   if (template === 'Blank Project') {
-    return [{ id: '1', name: 'README.md', type: 'file', language: 'markdown', content: '# My Project\n\nBuilt with Forge.\n' }]
+    return [{ id: '1', name: 'README.md', type: 'file', language: 'markdown', content: '# My Project\n\nBuilt with EmbrOS.\n' }]
   }
   if (template === 'Landing Page') {
     return [
@@ -78,7 +78,7 @@ function makeTemplateFiles(template: string): FileNode[] {
       <div class="card"><h3>🤖 AI-Powered</h3><p>AI mentor guides you.</p></div>
     </div>
   </section>
-  <footer><p>Built with ⚡ Forge</p></footer>
+  <footer><p>Built with ⚡ EmbrOS</p></footer>
   <script src="script.js"></script>
 </body>
 </html>` },
@@ -113,7 +113,7 @@ document.querySelectorAll('.links a').forEach(link => {
   }
   if (template === 'SaaS Application') {
     return [
-      { id: '1', name: 'README.md', type: 'file', language: 'markdown', content: '# SaaS Application\n\nFull-stack SaaS app built with Forge.\n\n## Tech Stack\n- Next.js 14 (App Router)\n- TypeScript\n- Tailwind CSS\n- Prisma\n- Stripe\n\n## Getting Started\n1. Copy `.env.example` to `.env`\n2. Run `npm install`\n3. Run `npm run dev`\n' },
+      { id: '1', name: 'README.md', type: 'file', language: 'markdown', content: '# SaaS Application\n\nFull-stack SaaS app built with EmbrOS.\n\n## Tech Stack\n- Next.js 14 (App Router)\n- TypeScript\n- Tailwind CSS\n- Prisma\n- Stripe\n\n## Getting Started\n1. Copy `.env.example` to `.env`\n2. Run `npm install`\n3. Run `npm run dev`\n' },
       { id: '2', name: 'package.json', type: 'file', language: 'json', content: `{
   "name": "saas-app",
   "version": "0.1.0",
@@ -169,7 +169,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."` },
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello from Forge 🔥</h1>
+  <h1>Hello from EmbrOS 🔥</h1>
   <p>Start building your project.</p>
   <script src="script.js"></script>
 </body>
@@ -194,7 +194,7 @@ async function askAI(messages: { role: string; content: string }[], apiKey: stri
       return `I'll help you build that! Here's a starting point:
 
 \`\`\`json
-{"files": [{"name": "component.tsx", "content": "export default function MyComponent() {\\n  return <div>Hello from Forge!</div>\\n}"}]}
+{"files": [{"name": "component.tsx", "content": "export default function MyComponent() {\\n  return <div>Hello from EmbrOS!</div>\\n}"}]}
 \`\`\`
 
 What would you like me to create?`
@@ -211,7 +211,7 @@ What do you want to work on?`
 
   const r = await fetch(OPENROUTER_API, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}`, 'HTTP-Referer': typeof location !== 'undefined' ? location.origin : 'http://localhost:3000', 'X-Title': 'Forge' },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}`, 'HTTP-Referer': typeof location !== 'undefined' ? location.origin : 'http://localhost:3000', 'X-Title': 'EmbrOS' },
     body: JSON.stringify({ model: pickModel(), messages, temperature: 0.7, max_tokens: 4096 }),
   })
   if (!r.ok) throw new Error(`API ${r.status}`)
@@ -314,7 +314,7 @@ export default function IDEPanel({ initialFiles, projectName = 'My Project', onB
     try {
       const fileList = files.map(f => `${f.type === 'folder' ? '📁' : '📄'} ${f.name}`).join('\n')
       const cur = curFile ? `Currently editing: **${curFile.name}**\n\`\`\`${curFile.language}\n${curFile.content}\n\`\`\`` : ''
-      const sysMsg = `You are Forge AI, a coding mentor and builder. Project: "${projName}".\n\nProject files:\n${fileList}\n\n${cur}\n\nHelp the user build their project. Be concise. Use markdown. To create or modify files, respond with: {"files":[{"name":"path/file.ext","content":"..."}]}`
+      const sysMsg = `You are EmbrOS AI, a coding mentor and builder. Project: "${projName}".\n\nProject files:\n${fileList}\n\n${cur}\n\nHelp the user build their project. Be concise. Use markdown. To create or modify files, respond with: {"files":[{"name":"path/file.ext","content":"..."}]}`
 
       const reply = await askAI([
         { role: 'system', content: sysMsg },
@@ -388,7 +388,7 @@ export default function IDEPanel({ initialFiles, projectName = 'My Project', onB
         {onBack && <button onClick={onBack} className="p-1.5 rounded hover:bg-[#1a1a1e] hidden lg:block"><ArrowLeft className="w-4 h-4" /></button>}
         <div className="flex items-center gap-1.5">
           <div className="w-5 h-5 rounded bg-[#f59e0b] flex items-center justify-center"><Flame className="w-3 h-3 text-[#0a0a0b]" /></div>
-          <span className="text-sm font-semibold hidden sm:inline">forge</span>
+          <span className="text-sm font-semibold hidden sm:inline">embrOS</span>
         </div>
         <div className="h-4 w-px bg-[#252529] hidden sm:block" />
         <input value={projName} onChange={e => setProjName(e.target.value)} className="bg-transparent border-none outline-none text-sm text-[#94949c] w-24 sm:w-40 hidden sm:block" />
@@ -576,7 +576,7 @@ export default function IDEPanel({ initialFiles, projectName = 'My Project', onB
                 )}
                 {bottomTab === 'terminal' && (
                   <div className="h-full bg-[#0a0a0b] p-3 font-mono text-xs text-[#94949c] overflow-y-auto">
-                    <p className="text-[#f59e0b] mb-1">🔥 Forge Terminal v0.2.0</p>
+                    <p className="text-[#f59e0b] mb-1">🔥 EmbrOS Terminal v0.2.0</p>
                     <p className="text-[#45454c] mb-3">Use the AI chat to run commands. Try: &quot;Install npm packages&quot; or &quot;Run dev server&quot;</p>
                     <p className="text-[#45454c] mb-1">Project: {projName}</p>
                     <p className="text-[#45454c] mb-1">Files: {files.length}</p>

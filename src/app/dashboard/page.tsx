@@ -148,7 +148,7 @@ export default function DashboardPage() {
           <div className="w-7 h-7 rounded-lg bg-[#f59e0b] flex items-center justify-center">
             <Flame className="w-4 h-4 text-[#0a0a0b]" />
           </div>
-          <span className="font-bold text-sm tracking-tight">forge</span>
+          <span className="font-bold text-sm tracking-tight">embrOS</span>
         </div>
 
         {/* Nav Links */}
@@ -197,7 +197,7 @@ export default function DashboardPage() {
               <div className="w-7 h-7 rounded-lg bg-[#f59e0b] flex items-center justify-center">
                 <Flame className="w-4 h-4 text-[#0a0a0b]" />
               </div>
-              <span className="font-bold text-sm tracking-tight">forge</span>
+              <span className="font-bold text-sm tracking-tight">embrOS</span>
             </div>
             <div className="flex items-center gap-3">
               <Link
@@ -507,7 +507,7 @@ export default function DashboardPage() {
         {/* ─── Footer ─── */}
         <footer className="border-t border-[#252529] mt-12">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between text-xs text-[#45454c]">
-            <span>&copy; 2025 Forge. Built to make you a builder.</span>
+            <span>&copy; 2026 EmbrOS. Built to make you a builder.</span>
             <div className="flex items-center gap-1">
               <Flame className="w-3 h-3 text-[#f59e0b]" />
               <span className="text-[#f59e0b]">v0.2.0</span>

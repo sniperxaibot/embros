@@ -1,4 +1,4 @@
-// FORGE - Prompt Library
+// EmbrOS - Prompt Library
 // Reusable prompts by category
 
 import type { Prompt } from '../types/index'

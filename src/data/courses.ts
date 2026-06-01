@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-// FORGE — Courses Data
+// EmbrOS — Courses Data
 // 10 courses with real content, bilingual support
 // ═══════════════════════════════════════════════════
 
@@ -131,7 +131,7 @@ A beautiful personal landing page with:
 
 ## Step 1: Describe Your Vision
 
-Open the Forge editor and tell the AI:
+Open the EmbrOS editor and tell the AI:
 
 "Create a personal landing page for me. My name is [Your Name]. I'm interested in [your interests]. Make it dark and modern with amber accents."
 
@@ -177,7 +177,7 @@ O landing page frumoasă cu:
 
 ## Pasul 1: Descrie Viziunea
 
-Deschide editorul Forge și spune AI-ului:
+Deschide editorul EmbrOS și spune AI-ului:
 
 "Creează o landing page pentru mine. Numele meu e [Numele Tău]. Mă interesează [interesele tale]. Să fie întunecată și modernă cu accente galben-portocalii."
 

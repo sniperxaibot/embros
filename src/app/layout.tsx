@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+// Clean modern grotesque — white UI type (Linear / Vercel register)
+const sans = Hanken_Grotesk({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
+// System monospace — command-center voice (labels, data, ⌘ palette)
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
@@ -19,23 +21,23 @@ const jetbrainsMono = JetBrains_Mono({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0a0a0b',
+  themeColor: '#07070a',
 }
 
 export const metadata: Metadata = {
-  title: 'Forge — AI Builder Operating System',
-  description: 'Forge is the AI Builder Operating System that teaches anyone to build real products with AI agents. Not a chatbot. Not a course platform. An operating system for builders.',
-  keywords: ['AI builder', 'build products', 'AI agents', 'learn to code', 'no-code', 'AI operating system', 'forge', 'builder platform'],
+  title: 'EmbrOS — AI Builder Operating System',
+  description: 'EmbrOS is the AI Builder Operating System that teaches anyone to build real products with AI agents. Not a chatbot. Not a course platform. An operating system for builders.',
+  keywords: ['AI builder', 'build products', 'AI agents', 'learn to code', 'no-code', 'AI operating system', 'embros', 'builder platform'],
   openGraph: {
-    title: 'Forge — AI Builder Operating System',
+    title: 'EmbrOS — AI Builder Operating System',
     description: 'Teaches anyone to build real products with AI agents. Not a chatbot. Not a course platform. An operating system for builders.',
     type: 'website',
     locale: 'en_US',
-    siteName: 'Forge',
+    siteName: 'EmbrOS',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Forge — AI Builder Operating System',
+    title: 'EmbrOS — AI Builder Operating System',
     description: 'Teaches anyone to build real products with AI agents. Not a chatbot. Not a course platform.',
   },
   manifest: '/manifest.json',
@@ -48,8 +50,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen bg-[#0a0a0b] text-[#e2e2e7] antialiased overflow-x-hidden">
+    <html lang="en" className={`dark ${sans.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen bg-[#07070a] text-[#f4f4f7] antialiased overflow-x-hidden">
         {children}
       </body>
     </html>

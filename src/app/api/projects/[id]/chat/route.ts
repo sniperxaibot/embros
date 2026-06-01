@@ -74,7 +74,7 @@ export async function POST(
     ? `\n\nCurrently editing: **${context.currentFile}**\n\`\`\`\n${context.fileContent.slice(0, 3000)}\n\`\`\``
     : ''
 
-  const systemPrompt = `You are Forge AI, a coding mentor and builder assistant. You are helping with the project "${project.name}".
+  const systemPrompt = `You are EmbrOS AI, a coding mentor and builder assistant. You are helping with the project "${project.name}".
 Project description: ${project.description || 'No description'}
 Project files: ${fileList}${currentFileContext}
 

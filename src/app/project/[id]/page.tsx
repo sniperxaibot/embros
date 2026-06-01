@@ -94,7 +94,7 @@ export default function ProjectIDEPage() {
             name: 'README.md',
             type: 'file',
             language: 'markdown',
-            content: `# ${data.name}\n\n${data.description || 'Built with Forge.'}\n`
+            content: `# ${data.name}\n\n${data.description || 'Built with EmbrOS.'}\n`
           }
           projectFiles.push(starter)
         }
@@ -269,7 +269,7 @@ export default function ProjectIDEPage() {
           <div className="w-5 h-5 rounded bg-[#f59e0b] flex items-center justify-center">
             <Flame className="w-3 h-3 text-[#0a0a0b]" />
           </div>
-          <span className="text-sm font-semibold hidden sm:inline">forge</span>
+          <span className="text-sm font-semibold hidden sm:inline">embrOS</span>
         </div>
         <div className="h-4 w-px bg-[#252529] hidden sm:block" />
         <span className="text-sm text-[#94949c] truncate hidden sm:block max-w-[200px]">

@@ -1,4 +1,4 @@
-// FORGE - Books Data
+// EmbrOS - Books Data
 // 5 structured books with real chapters
 // Romanian translations stored as escaped Unicode to avoid encoding issues
 
@@ -17,8 +17,8 @@ export const BOOKS: Book[] = [
   {
     id: 'book-1',
     slug: 'forge-builder-handbook',
-    title: 'The Forge Builder Handbook',
-    titleRo: 'Manualul Builderului Forge',
+    title: 'The EmbrOS Builder Handbook',
+    titleRo: 'Manualul Builderului EmbrOS',
     description: 'Your complete guide to building software with AI. From zero to shipped product.',
     descriptionRo: ro('Ghidul tau complet pentru construirea de software cu AI. De la zero la produs lansat.'),
     coverColor: '#f59e0b',
@@ -82,7 +82,7 @@ AI can write code. But AI doesn't know what problem keeps you up at night, what 
 3. Pick the highest score
 4. Start building this week
 
-Welcome to Forge. Let's build.`,
+Welcome to EmbrOS. Let's build.`,
         contentRo: ro(`# Capitolul 1: Mentalitatea Builderului
 
 Nu ai nevoie de permisiune pentru a construi. Cel mai mare mit in tech e ca trebuie sa fii un "developer real" pentru a construi software. Asta era adevarat acum 10 ani. Nu e adevarat astazi.
@@ -112,7 +112,7 @@ Nu ai nevoie de licenta in CS. Ai nevoie de curiositate si vointa de a incepe.
 
 Ce te face valoros nu e stirea fiecarui limbaj de programare. E stiul **ce sa construiesti** si **de ce conteaza**.
 
-Bine ai venit la Forge. Hai sa construim.`),
+Bine ai venit la EmbrOS. Hai sa construim.`),
       },
       {
         id: 'ch-1-2',
@@ -133,7 +133,7 @@ Take any idea and answer these questions:
 
 ## Day 2: Your First AI Conversation
 
-Open Forge and describe your idea. Don't worry about being perfect. Just start.
+Open EmbrOS and describe your idea. Don't worry about being perfect. Just start.
 
 **The Magic First Prompt:**
 "I want to build [description]. My target users are [who]. The main feature is [what]. Can you create a simple version I can start with?"
@@ -177,7 +177,7 @@ Prima ta zi nu e despre scriere de cod. E despre a invata sa **descrii clar ce v
 
 ## Ziua 2: Prima Ta Conversatie cu AI
 
-Deschide Forge si descrie ideea. Nu te stresa sa fii perfect. Doar incepe.
+Deschide EmbrOS si descrie ideea. Nu te stresa sa fii perfect. Doar incepe.
 
 **Prompt-ul Magic:**
 "Vreau sa construiesc [descriere]. Utilizatorii tinta sunt [cine]. Functionalitatea principala e [ce]. Poti crea o versiune simpla cu care sa incep?"
@@ -361,7 +361,7 @@ When you ask an agent "Center the header div", it **edits the file for you**.
 
 That's the difference. Agents don't just talk -- they **do**.
 
-## The Agent Team in FORGE
+## The Agent Team in EmbrOS
 
 **Orchestrator** -- The project manager. Coordinates all other agents.
 
@@ -413,7 +413,7 @@ Cand intrebi un agent "Centreaza div-ul header", **editeaza fisierul pentru tine
 
 Asta e diferenta. Agentii nu doar vorbesc -- ei **fac**.
 
-## Echipa de Agenti in FORGE
+## Echipa de Agenti in EmbrOS
 
 **Orchestrator** -- Managerul de proiect. Coordoneaza toti ceilalti agenti.
 
@@ -606,7 +606,7 @@ Every day you build, you get better at describing what you want, reviewing AI ou
 
 The best AI founder in the world is the one who started. Not the one with the best idea. Not the one with the most money. The one who **started**.
 
-Open Forge. Describe your idea. Start building. Your future self will thank you.`,
+Open EmbrOS. Describe your idea. Start building. Your future self will thank you.`,
         contentRo: ro(`# Capitolul 1: Avantajul Fondatorului AI
 
 Niciodata Nu a Mai Usor. Un fondator solo cu AI poate face acum ce cerea o echipa de 10.
@@ -660,7 +660,7 @@ Observa ce NU e pe lista: "scrierea codului." Asta e jobul AI-ului acum.
 
 Cel mai bun fondator AI din lume e cel care a inceput. Nu cel cu cea mai buna idee. Nu cel cu cei mai multi bani. Cel care **a inceput**.
 
-Deschide Forge. Descrie ideea. Incepe sa construiesti.
+Deschide EmbrOS. Descrie ideea. Incepe sa construiesti.
 
 Eu-ul tau viitor iti va multumi.`),
       },

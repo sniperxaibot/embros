@@ -13,11 +13,10 @@ build
 # Misc
 .DS_Store
 *.pem
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+
+# Env — never commit real environment files (Railway injects them at runtime)
+.env*
+!.env.example
 
 # Debug
 npm-debug.log*
@@ -37,4 +36,7 @@ coverage
 
 # OS
 Thumbs.db
-.env.db
+
+# Claude Code local tooling
+.claude/
+tsconfig.tsbuildinfo

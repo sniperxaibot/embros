@@ -1,4 +1,4 @@
-// FORGE - Project Templates
+// EmbrOS - Project Templates
 // 10 starter templates with real file content
 
 import type { Template, FileNode } from '../types/index'
@@ -219,7 +219,7 @@ const bot = new Bot<MyContext>(process.env.BOT_TOKEN || '')
 bot.use(session({ initial: () => ({ step: 'idle' }) }))
 
 bot.command('start', async (ctx) => {
-  await ctx.reply('Welcome to Forge Bot! 🔥\\n\\nUse /idea to share your project idea.')
+  await ctx.reply('Welcome to EmbrOS Bot! 🔥\\n\\nUse /idea to share your project idea.')
 })
 
 bot.command('idea', async (ctx) => {
@@ -255,7 +255,7 @@ bot.start()`),
     techStack: ['TypeScript', 'Node.js', 'Cron', 'APIs'],
     category: 'automation',
     files: [
-      f('t5-1', 'automation.ts', 'typescript', `// Forge Automation Tool
+      f('t5-1', 'automation.ts', 'typescript', `// EmbrOS Automation Tool
 // Define triggers and actions
 
 interface Trigger {
@@ -387,7 +387,7 @@ export default function App() {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>My Mobile App</Text>
-        <Text style={styles.subtitle}>Built with Forge</Text>
+        <Text style={styles.subtitle}>Built with EmbrOS</Text>
       </View>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Welcome!</Text>
@@ -465,7 +465,7 @@ app.listen(PORT, () => {
     techStack: ['TypeScript', 'Node.js', 'OpenRouter', 'Agent Pattern'],
     category: 'ai',
     files: [
-      f('t10-1', 'agents/orchestrator.ts', 'typescript', `// Forge Agent Orchestrator
+      f('t10-1', 'agents/orchestrator.ts', 'typescript', `// EmbrOS Agent Orchestrator
 // Coordinates multiple AI agents for complex tasks
 
 interface Agent {

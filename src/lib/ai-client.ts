@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-// FORGE — AI Client with Provider Abstraction
+// EmbrOS — AI Client with Provider Abstraction
 // Supports OpenRouter with model rotation
 // Designed to swap providers later
 // ═══════════════════════════════════════════════════
@@ -24,11 +24,13 @@ export interface AIOptions {
 // ─── OpenRouter Provider ───
 const OPENROUTER_API = 'https://openrouter.ai/api/v1/chat/completions'
 
-// Model rotation: use free/fast models
+// Model rotation: OpenRouter FREE models only (must stay free for us).
+// Easy to swap — keep the `:free` suffix. owl-alpha is a reliable free fallback.
 const MODEL_TIERS = [
-  { id: 'openrouter/owl-alpha', role: 'fast' },
-  { id: 'openrouter/auto', role: 'auto' },
-  { id: 'google/gemini-2.0-flash-001', role: 'fallback' },
+  { id: 'meta-llama/llama-3.3-70b-instruct:free', role: 'fast' },
+  { id: 'deepseek/deepseek-chat-v3-0324:free', role: 'smart' },
+  { id: 'google/gemini-2.0-flash-exp:free', role: 'fallback' },
+  { id: 'openrouter/owl-alpha', role: 'auto' },
 ]
 
 let _modelIndex = 0
@@ -60,7 +62,43 @@ function getSiteInfo() {
       title: document.title,
     }
   }
-  return { url: 'http://localhost:3000', title: 'Forge' }
+  return { url: 'http://localhost:3000', title: 'EmbrOS' }
+}
+
+// Single call against one specific model. Throws on any failure.
+async function callModel(
+  model: string,
+  messages: AIMessage[],
+  options: AIOptions
+): Promise<string> {
+  const apiKey = getApiKey()
+  const { url, title } = getSiteInfo()
+
+  const response = await fetch(OPENROUTER_API, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+      'HTTP-Referer': url,
+      'X-Title': title,
+    },
+    body: JSON.stringify({
+      model,
+      messages,
+      temperature: options.temperature ?? 0.7,
+      max_tokens: options.maxTokens ?? 4096,
+    }),
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.text().catch(() => '')
+    throw new Error(`OpenRouter ${response.status}: ${errorBody}`)
+  }
+
+  const data = await response.json()
+  const content = data.choices?.[0]?.message?.content
+  if (!content) throw new Error('OpenRouter returned empty content')
+  return content
 }
 
 export async function chatWithAI(
@@ -69,45 +107,33 @@ export async function chatWithAI(
 ): Promise<string> {
   const apiKey = getApiKey()
   if (!apiKey) {
-    // Return mock response for development without API key
+    // No key configured — return a safe mock so the app never hard-fails.
     return mockAIResponse(messages)
   }
 
-  const model = options.model || pickModel()
-  const { url, title } = getSiteInfo()
-
-  try {
-    const response = await fetch(OPENROUTER_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'HTTP-Referer': url,
-        'X-Title': title,
-      },
-      body: JSON.stringify({
-        model,
-        messages,
-        temperature: options.temperature ?? 0.7,
-        max_tokens: options.maxTokens ?? 4096,
-      }),
-    })
-
-    if (!response.ok) {
-      const errorBody = await response.text().catch(() => '')
-      throw new Error(`OpenRouter ${response.status}: ${errorBody}`)
-    }
-
-    const data = await response.json()
-    return data.choices?.[0]?.message?.content ?? ''
-  } catch (err) {
-    // Fallback to next model on failure
-    if (!options.model) {
-      console.warn(`AI call failed with ${model}, trying fallback...`)
-      return chatWithAI(messages, { ...options, model: pickModel('auto') })
-    }
-    throw err
+  // If a specific model is forced, honor it (no auto-fallback).
+  if (options.model) {
+    return callModel(options.model, messages, options)
   }
+
+  // Otherwise walk the free-model chain in order. On rate-limit (429),
+  // not-found (404) or any transient error, fall through to the next model.
+  // This keeps us running entirely on free models until we can afford premium.
+  const chain = MODEL_TIERS.map(m => m.id)
+  let lastError: unknown = null
+
+  for (const model of chain) {
+    try {
+      return await callModel(model, messages, options)
+    } catch (err) {
+      lastError = err
+      console.warn(`[AI] ${model} failed, trying next free model...`, (err as Error)?.message)
+    }
+  }
+
+  // Every free model failed (all rate-limited / down). Degrade gracefully.
+  console.error('[AI] All free models exhausted.', lastError)
+  return mockAIResponse(messages)
 }
 
 export async function chatWithAgent(
@@ -150,7 +176,7 @@ function mockAIResponse(messages: AIMessage[]): string {
     return `I'll help you build that! Here's what I can create:
 
 \`\`\`json
-{"files": [{"name": "index.html", "<!DOCTYPE html>\\n<html lang='en'>\\n<head>\\n  <meta charset='UTF-8'>\\n  <meta name='viewport' content='width=device-width, initial-scale=1.0'>\\n  <title>My App</title>\\n  <link rel='stylesheet' href='style.css'>\\n</head>\\n<body>\\n  <h1>Hello from Forge! 🔥</h1>\\n  <p>Your app is ready.</p>\\n  <script src='script.js'></script>\\n</body>\\n</html>"}, {"name": "style.css", "* { margin: 0; padding: 0; box-sizing: border-box; }\\nbody { font-family: system-ui; background: #0a0a0b; color: #e2e2e7; padding: 2rem; }\\nh1 { color: #f59e0b; }"}, {"name": "script.js", "console.log('App loaded!');"}]}
+{"files": [{"name": "index.html", "<!DOCTYPE html>\\n<html lang='en'>\\n<head>\\n  <meta charset='UTF-8'>\\n  <meta name='viewport' content='width=device-width, initial-scale=1.0'>\\n  <title>My App</title>\\n  <link rel='stylesheet' href='style.css'>\\n</head>\\n<body>\\n  <h1>Hello from EmbrOS! 🔥</h1>\\n  <p>Your app is ready.</p>\\n  <script src='script.js'></script>\\n</body>\\n</html>"}, {"name": "style.css", "* { margin: 0; padding: 0; box-sizing: border-box; }\\nbody { font-family: system-ui; background: #0a0a0b; color: #e2e2e7; padding: 2rem; }\\nh1 { color: #f59e0b; }"}, {"name": "script.js", "console.log('App loaded!');"}]}
 \`\`\`
 
 This creates a basic project structure. Tell me more about what you want to build!`
@@ -159,7 +185,7 @@ This creates a basic project structure. Tell me more about what you want to buil
   if (lastMsg.includes('explain') || lastMsg.includes('what is') || lastMsg.includes('how')) {
     return `Great question! Let me explain:
 
-**The concept** is simple. FORGE works by connecting you with AI agents that help you build real software. You describe what you want, and the AI creates the files, writes the code, and teaches you along the way.
+**The concept** is simple. EmbrOS works by connecting you with AI agents that help you build real software. You describe what you want, and the AI creates the files, writes the code, and teaches you along the way.
 
 **Key benefits:**
 - No coding experience needed
@@ -170,7 +196,7 @@ This creates a basic project structure. Tell me more about what you want to buil
 What would you like to build first? 🔥`
   }
 
-  return `I'm your AI mentor on FORGE. I can help you:
+  return `I'm your AI mentor on EmbrOS. I can help you:
 
 - **Build features** — Describe what you want, I'll create the code
 - **Fix bugs** — Share the error, I'll find the solution

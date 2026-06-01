@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#0a0a0b"/>
-  <path d="M16 6c-1.5 4-5 6.5-5 10.5a5.5 5.5 0 0011 0c0-4-3.5-6.5-5-10.5z" fill="#f59e0b"/>
-  <path d="M16 12c-.8 2-2.5 3.2-2.5 5.2a3.25 3.25 0 006.5 0c0-2-1.7-3.2-2.5-5.2z" fill="#fbbf24"/>
+  <rect width="32" height="32" rx="8" fill="#07070a"/>
+  <defs>
+    <linearGradient id="s" x1="6" y1="6" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe9a8"/>
+      <stop offset="0.5" stop-color="#f0b429"/>
+      <stop offset="1" stop-color="#b87d12"/>
+    </linearGradient>
+    <radialGradient id="k" cx="50%" cy="46%" r="58%">
+      <stop stop-color="#fff7da"/>
+      <stop offset="0.5" stop-color="#ffd24d"/>
+      <stop offset="1" stop-color="#e0980f"/>
+    </radialGradient>
+  </defs>
+  <path d="M11.5 7.5C6.4 9.6 5.2 15.4 8.8 19.2" stroke="url(#s)" stroke-width="2.3" stroke-linecap="round"/>
+  <path d="M20.5 24.5C25.6 22.4 26.8 16.6 23.2 12.8" stroke="url(#s)" stroke-width="2.3" stroke-linecap="round"/>
+  <path d="M16 5.4C16.7 11.9 19.1 14.3 26 16C19.1 17.7 16.7 20.1 16 26.6C15.3 20.1 12.9 17.7 6 16C12.9 14.3 15.3 11.9 16 5.4Z" fill="url(#k)"/>
 </svg>
