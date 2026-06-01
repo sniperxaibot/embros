@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "prisma db push --skip-generate && next start",
+    "start": "next start",
+    "db:push": "prisma db push --skip-generate",
     "start:web": "next start",
     "lint": "next lint"
   },
