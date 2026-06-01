@@ -1,6 +1,7 @@
 FROM node:22-alpine
 
 WORKDIR /app
+ENV PATH="/app/node_modules/.bin:${PATH}"
 
 # Install dependencies first (better caching)
 COPY package.json package-lock.json* ./
