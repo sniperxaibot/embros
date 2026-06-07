@@ -34,6 +34,15 @@ yarn-error.log*
 coverage
 .nyc_output
 
+# Screenshots — contain sensitive UI data, never commit
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.mov
+
 # OS
 Thumbs.db
 
