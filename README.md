@@ -1,81 +1,68 @@
-# 🔥 Forge
+# 🔥 EmbrOS — AI Builder Operating System
 
 **Where ideas become real.**
 
-Forge is an adaptive AI mentor platform that helps anyone with an idea build real products. Not through courses. Not through tutorials. Through **building** — with personalized, just-in-time AI guidance that teaches as it helps.
+EmbrOS is an AI Builder Operating System that helps anyone build real software. Not through courses. Not through tutorials. Through **building** — with 12 specialized AI agents that plan, build, debug, test, deploy, and teach you skills just-in-time.
 
 ## The Problem
 
-Millions of people leave schools, universities, and bootcamps without the ability to build. They have ideas, ambition, and access to AI — but they don't know how to start, what to learn, or how to ship.
-
-Existing education is too slow. Traditional coding education is outdated. AI tools overwhelm beginners. The missing piece isn't intelligence — it's **guidance**.
+Millions of people have ideas but can't build software. They have ambition and access to AI — but existing tools either require coding knowledge or generate toy apps. Course platforms teach in isolation — you watch videos but never ship anything real.
 
 ## The Solution
 
-Forge starts with one question: **"What do you want to build?"**
+EmbrOS starts with one question: **"What do you want to build?"**
 
-From there:
-1. **Goal → Roadmap** — AI analyzes your idea and creates a personalized learning path
-2. **Build + Learn** — AI agents guide you step by step, explaining as they help
-3. **Adaptive Difficulty** — Complexity revealed only when you're ready
-4. **Ship Real Products** — From idea to launched in weeks, not months
+1. **Describe your idea** — in plain English or Romanian
+2. **Agents plan & build** — 12 specialists work in parallel on real code, real files, real tests
+3. **It detects what you don't know** — spots knowledge gaps as you build
+4. **It teaches — just in time** — 90-second lessons injected into your project
+5. **You ship & grow** — deploy a real product, your skill profile levels up
 
-## Why "Forge"?
+## The 12 Agents
 
-Like a blacksmith's forge, we transform raw ideas into refined, functional products through heat, pressure, and skill. Simple name. Strong purpose.
+| # | Agent | Role |
+|---|-------|------|
+| 01 | Orchestrator | Plans & delegates |
+| 02 | Architect | System & schema design |
+| 03 | Builder | Writes full-stack code |
+| 04 | Frontend | Interface & interaction |
+| 05 | Backend | APIs & business logic |
+| 06 | Database | Data modelling |
+| 07 | Debugger | Finds & fixes faults |
+| 08 | Tester | QA & coverage |
+| 09 | Mentor | Teaches you |
+| 10 | Tutor.ro | Romanian guidance |
+| 11 | Deployer | Ships it live |
+| 12 | Auditor | Launch readiness |
+
++ spin up custom agents for your own workflow
+
+## Why EmbrOS?
+
+- **Not a chatbot** — it's a full orchestrated team with parallel workers
+- **Not a course** — it teaches inside your project, exactly when you need it
+- **Learns you** — persistent skill profile that gets sharper with every build
+- **Bilingual** — English and Romanian from day one
+- **Runs everywhere** — Web, macOS, Windows, Linux, CLI
 
 ## Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS + custom design system (dark-first, ember accent)
-- **UI**: Framer Motion for animations, Lucide icons
-- **State**: Zustand
-- **AI**: OpenRouter API (multi-model access)
+- **Auth**: Supabase
+- **Database**: PostgreSQL (Railway)
+- **AI**: OpenRouter API (multi-model)
+- **Styling**: Tailwind CSS, dark-first design system
 
-## Quick Start
+## Access
 
-```bash
-cd BuilderCompanion
-cp .env.example .env
-# Edit .env and add your OpenRouter API key
-npm run dev
-# Open http://localhost:3000
-```
+- **Free**: 1 project, 3 agent runs/day, 3 courses, community access
+- **Pro** ($15/mo): Unlimited projects, all 12 agents, all courses, priority runs, deployment tools, native + CLI
 
-### Environment Variables
+## Links
 
-| Variable | Required | Description |
-| --- | --- | --- |
-| `NEXT_PUBLIC_OPENROUTER_API_KEY` | Yes | Get yours at https://openrouter.ai → API Keys |
-
-## Brand Guidelines
-
-- **Colors**: `var(--forge-bg)` (#0a0a0b) dark bg, `var(--forge-ember)` (#f59e0b) accent
-- **Fonts**: Inter (UI), JetBrains Mono (code)
-- **Tone**: Direct, encouraging, no fluff. Like a skilled mentor who respects your time.
-- **Design principles**: Dark-first, progressive disclosure, visible progress, zero overwhelm
-
-## Project Structure
-
-```
-src/app/
-├── globals.css       # Design system, Tailwind, animations, scrollbar
-├── layout.tsx        # Root layout (dark mode, Inter font)
-└── page.tsx          # Landing page + App shell (main file)
-docs/                 # Research, strategy, architecture documents
-```
-
-## Roadmap
-
-- [x] Landing page with brand identity
-- [x] App shell with chat interface
-- [x] OpenRouter AI integration
-- [ ] Learning path sidebar (dynamic module generator)
-- [ ] Multi-agent system (Developer, Designer, Tester, Research)
-- [ ] User model / skill tracking
-- [ ] Project workspace with code editor
-- [ ] Deployment integration
-- [ ] Pro tier features
+- 🌐 [embros.xyz](https://embros.xyz)
+- 💬 [Join the Discord](https://discord.gg/GCNzrkWP)
+- 📝 [Join the waitlist](https://embros.xyz)
 
 ## License
 
